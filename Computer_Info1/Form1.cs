@@ -62,7 +62,7 @@ namespace Computer_Info1
         private void btn_export_Click(object sender, EventArgs e)
         {
             //btn_export.Text=Tools.ExportData();
-            //Tools.ExportData(lbl_dhcp_lan.Text, lbl_dhcp_wlan.Text,txtbox_nr_inw.Text,txtbox_id.Text);
+            Tools.ExportData(lbl_dhcp_lan.Text, lbl_dhcp_wlan.Text,txtbox_nr_inw.Text,txtbox_id.Text);
         }
 
         private void btn_cpu_Click(object sender, EventArgs e)

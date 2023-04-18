@@ -42,7 +42,7 @@ namespace Computer_Info1
             btn_mac_lan.Text = "LAN: " + Tools.GetLocalMac_Lan();
         }
 
-        private void btn_dhcp_Click(object sender, EventArgs e)
+        public void btn_dhcp_Click(object sender, EventArgs e)
         {
             string ip = txtbox_dhcp.Text;
             string lan = Tools.GetLocalMac_Lan();
@@ -62,6 +62,7 @@ namespace Computer_Info1
         private void btn_export_Click(object sender, EventArgs e)
         {
             //btn_export.Text=Tools.ExportData();
+            btn_dhcp_Click(sender,e);
             Tools.ExportData(lbl_dhcp_lan.Text, lbl_dhcp_wlan.Text,txtbox_nr_inw.Text,txtbox_id.Text);
         }
 
@@ -83,6 +84,7 @@ namespace Computer_Info1
         private void btn_set_host_Click(object sender, EventArgs e)
         {
             Tools.setLocalHostName(txtbox_host.Text);
+            btn_host.Text = "HOST: " + System.Net.Dns.GetHostName();
         }
 
         private void Computer_Info_Load(object sender, EventArgs e)

@@ -200,7 +200,7 @@ namespace Computer_Info1
             return drive_info;
         }
 
-        public static void setLocalHostName(string newName)
+        public static bool setLocalHostName(string newName)
         {
             RegistryKey key = Registry.LocalMachine;
 
@@ -217,7 +217,7 @@ namespace Computer_Info1
             hostName.SetValue("Hostname", newName);
             hostName.SetValue("NV Hostname", newName);
             hostName.Close();
-
+            return true;
         }
 
         public static bool IsAdministrator() // true when run as admin
@@ -226,34 +226,5 @@ namespace Computer_Info1
             var principal = new WindowsPrincipal(identity);
             return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
-
-        /*
-        public static void AdminRelauncher()
-        {
-            if (IsAdministrator())
-            {
-                ProcessStartInfo proc = new ProcessStartInfo();
-                proc.UseShellExecute = true;
-                proc.WorkingDirectory = Environment.CurrentDirectory;
-                proc.FileName = Assembly.GetEntryAssembly().CodeBase;
-
-                proc.Verb = "runas";
-
-                Process.Start(proc);
-                System.Windows.Application.Current.Shutdown();
-                
-                try
-                {
-                    Process.Start(proc);
-                    System.Windows.Application.Current.Shutdown();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("This program must be run as an administrator! \n\n" );
-                }
-                
-            }
-        }
-        */
     }
 }

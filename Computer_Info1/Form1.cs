@@ -54,10 +54,7 @@ namespace Computer_Info1
             lbl_dhcp_wlan.Visible = true;
         }
 
-        private void lbl_dhcp_wlan_Click(object sender, EventArgs e)
-        {
-
-        }
+       
 
         private void btn_export_Click(object sender, EventArgs e)
         {
@@ -94,6 +91,16 @@ namespace Computer_Info1
                 MessageBox.Show("Not Running as administrator");
             }
             
+        }
+
+        private void lbl_dhcp_lan_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(lbl_dhcp_lan.Text);
+        }
+
+        private void lbl_dhcp_wlan_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(lbl_dhcp_wlan.Text);
         }
     }
 }

@@ -89,11 +89,9 @@ namespace Computer_Info1
 
         private void Computer_Info_Load(object sender, EventArgs e)
         {
-                //Tools.AdminRelauncher();
             if(!Tools.IsAdministrator())
             {
                 MessageBox.Show("Not Running as administrator");
-               // Tools.AdminRelauncher();
             }
             
         }

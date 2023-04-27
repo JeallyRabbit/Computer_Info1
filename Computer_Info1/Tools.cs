@@ -11,6 +11,8 @@ using System.IO;
 using Microsoft.Win32;
 using System.Security.Principal;
 using System.Diagnostics;
+using System.DirectoryServices.AccountManagement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Computer_Info1
 {
@@ -144,6 +146,7 @@ namespace Computer_Info1
 
             //return userFolderPath;
             // Save the workbook
+            
             workbook.SaveAs(filePath, XlFileFormat.xlOpenXMLWorkbook, Missing.Value,
                 Missing.Value, false, false, XlSaveAsAccessMode.xlNoChange,
                 XlSaveConflictResolution.xlUserResolution, true, Missing.Value,
@@ -152,6 +155,7 @@ namespace Computer_Info1
             // Close the workbook and release the COM objects
             workbook.Close();
             excel.Quit();
+            
             System.Runtime.InteropServices.Marshal.ReleaseComObject(worksheet);
             System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
             System.Runtime.InteropServices.Marshal.ReleaseComObject(excel);
@@ -225,6 +229,15 @@ namespace Computer_Info1
             var identity = WindowsIdentity.GetCurrent();
             var principal = new WindowsPrincipal(identity);
             return principal.IsInRole(WindowsBuiltInRole.Administrator);
+        }
+
+        public static void SetLocalAdminOn(string password)
+        {
+            PrincipalContext context = new PrincipalContext(ContextType.Machine);
+            string userName = "Administrator";
+            UserPrincipal user = UserPrincipal.FindByIdentity(context,  userName);
+            user.Enabled = true;
+            //return user.Name;
         }
     }
 }

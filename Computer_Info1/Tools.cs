@@ -33,6 +33,18 @@ namespace Computer_Info1
             string addr = "";
             foreach (NetworkInterface n in NetworkInterface.GetAllNetworkInterfaces())
             {
+                if (n.OperationalStatus != OperationalStatus.Up && n.Name.StartsWith("Wi-Fi"))
+                {
+                    //network card turned off
+                    MessageBox.Show("turning on wlan network card");
+
+                    ProcessStartInfo psi = new ProcessStartInfo("netsh", "interface set interface \"" + n.Name + "\" enable");
+                    Process p = new Process();
+                    p.StartInfo = psi;
+                    p.Start();
+
+                }
+
                 if (/*n.OperationalStatus == OperationalStatus.Up  && */ n.Name.StartsWith("Wi-Fi"))
                 {
                     addr += n.GetPhysicalAddress().ToString();
@@ -59,7 +71,20 @@ namespace Computer_Info1
             string addr = "";
             foreach (NetworkInterface n in NetworkInterface.GetAllNetworkInterfaces())
             {
-                if (/* n.OperationalStatus == OperationalStatus.Up && */ n.Name.StartsWith("Ethernet"))
+                /*
+                if(/*n.OperationalStatus == OperationalStatus.Down && n.Name.StartsWith("Ethernet"))
+                {
+                    //network card turned off
+                    MessageBox.Show("turning on lan network card");
+                    
+                    ProcessStartInfo psi = new ProcessStartInfo("netsh", "interface set interface \"" + n.Name + "\" enable");
+                    Process p = new Process();
+                    p.StartInfo = psi;
+                    p.Start();
+                    
+                }
+                */
+                if ( n.OperationalStatus == OperationalStatus.Up && n.Name.StartsWith("Ethernet"))
                 {
                     addr += n.GetPhysicalAddress().ToString();
                     //MessageBox.Show(n.Name);

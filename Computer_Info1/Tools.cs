@@ -33,13 +33,16 @@ namespace Computer_Info1
         public static string GetLocalMac_Wlan()
         {
             string addr = "";
-            foreach (NetworkInterface n in NetworkInterface.GetAllNetworkInterfaces())
+            foreach (NetworkInterface n in NetworkInterface.GetAllNetworkInterfaces() )
             {
-                if (/*n.OperationalStatus == OperationalStatus.Up  && */ n.Name.StartsWith("Wi-Fi"))
+                //MessageBox.Show(n.Name + " | " + n.OperationalStatus);
+                if (/* n.OperationalStatus == OperationalStatus.Up &&*/ n.Name.StartsWith("Wi-Fi") &&
+                    n.NetworkInterfaceType==NetworkInterfaceType.Wireless80211 )
                 {
                     addr += n.GetPhysicalAddress().ToString();
+                    //MessageBox.Show( n.Description + " OperationalStatus: " +n.OperationalStatus);  
                     //MessageBox.Show(n.Name);
-                    break;
+                    //break;
                 }
                 //MessageBox.Show(n.Name);
             }
@@ -54,6 +57,23 @@ namespace Computer_Info1
 
             }
             return lan;
+        }
+
+        public static string GetLocalMac_Wlan2()
+        {
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter");
+            ManagementObjectCollection adapters = searcher.Get();
+
+            foreach (ManagementObject adapter in adapters)
+            {
+                
+                    MessageBox.Show("Nazwa: " + adapter["Name"]+ "Typ interfejsu: " + adapter["AdapterType"]
+                        + "Status: " + adapter["NetConnectionStatus"] + "MAC: " + adapter["MACAddress"]);  
+            }
+            //status 0 - network adapter is off
+            //status 7 - network adapter is on - can't transfer data
+            //status 2 - network adapter id on - can transfer data
+            return "0";
         }
 
         public static string GetLocalMac_Lan()

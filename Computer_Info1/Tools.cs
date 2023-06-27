@@ -11,6 +11,8 @@ using System.IO;
 using Microsoft.Win32;
 using System.Security.Principal;
 using System.Diagnostics;
+using System.DirectoryServices.AccountManagement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Computer_Info1
 {
@@ -31,13 +33,16 @@ namespace Computer_Info1
         public static string GetLocalMac_Wlan()
         {
             string addr = "";
-            foreach (NetworkInterface n in NetworkInterface.GetAllNetworkInterfaces())
+            foreach (NetworkInterface n in NetworkInterface.GetAllNetworkInterfaces() )
             {
-                if (/*n.OperationalStatus == OperationalStatus.Up  && */ n.Name.StartsWith("Wi-Fi"))
+                //MessageBox.Show(n.Name + " | " + n.OperationalStatus);
+                if (/* n.OperationalStatus == OperationalStatus.Up &&*/ n.Name.StartsWith("Wi-Fi") &&
+                    n.NetworkInterfaceType==NetworkInterfaceType.Wireless80211 )
                 {
                     addr += n.GetPhysicalAddress().ToString();
+                    //MessageBox.Show( n.Description + " OperationalStatus: " +n.OperationalStatus);  
                     //MessageBox.Show(n.Name);
-                    break;
+                    //break;
                 }
                 //MessageBox.Show(n.Name);
             }
@@ -52,6 +57,23 @@ namespace Computer_Info1
 
             }
             return lan;
+        }
+
+        public static string GetLocalMac_Wlan2()
+        {
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter");
+            ManagementObjectCollection adapters = searcher.Get();
+
+            foreach (ManagementObject adapter in adapters)
+            {
+                
+                    MessageBox.Show("Nazwa: " + adapter["Name"]+ "Typ interfejsu: " + adapter["AdapterType"]
+                        + "Status: " + adapter["NetConnectionStatus"] + "MAC: " + adapter["MACAddress"]);  
+            }
+            //status 0 - network adapter is off
+            //status 7 - network adapter is on - can't transfer data
+            //status 2 - network adapter id on - can transfer data
+            return "0";
         }
 
         public static string GetLocalMac_Lan()
@@ -144,6 +166,7 @@ namespace Computer_Info1
 
             //return userFolderPath;
             // Save the workbook
+            
             workbook.SaveAs(filePath, XlFileFormat.xlOpenXMLWorkbook, Missing.Value,
                 Missing.Value, false, false, XlSaveAsAccessMode.xlNoChange,
                 XlSaveConflictResolution.xlUserResolution, true, Missing.Value,
@@ -152,6 +175,7 @@ namespace Computer_Info1
             // Close the workbook and release the COM objects
             workbook.Close();
             excel.Quit();
+            
             System.Runtime.InteropServices.Marshal.ReleaseComObject(worksheet);
             System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);
             System.Runtime.InteropServices.Marshal.ReleaseComObject(excel);
@@ -219,6 +243,7 @@ namespace Computer_Info1
             hostName.SetValue("NV Hostname", newName);
             hostName.Close();
             */
+            // Create a new process
             ProcessStartInfo process = new ProcessStartInfo();
 
             // set name of process to "WMIC.exe"
@@ -233,7 +258,7 @@ namespace Computer_Info1
                 proc.WaitForExit();
 
                 // print the status of command
-                Console.WriteLine("Exit code = " + proc.ExitCode);
+                MessageBox.Show("Exit code = " + proc.ExitCode);
             }
             return true;
         }
@@ -243,6 +268,15 @@ namespace Computer_Info1
             var identity = WindowsIdentity.GetCurrent();
             var principal = new WindowsPrincipal(identity);
             return principal.IsInRole(WindowsBuiltInRole.Administrator);
+        }
+
+        public static void SetLocalAdminOn(string password)
+        {
+            PrincipalContext context = new PrincipalContext(ContextType.Machine);
+            string userName = "Administrator";
+            UserPrincipal user = UserPrincipal.FindByIdentity(context,  userName);
+            user.Enabled = true;
+            //return user.Name;
         }
     }
 }

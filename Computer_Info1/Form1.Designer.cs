@@ -47,6 +47,9 @@
             this.btn_hardrive = new System.Windows.Forms.Button();
             this.btn_set_host = new System.Windows.Forms.Button();
             this.txtbox_host = new System.Windows.Forms.TextBox();
+            this.btn_admin = new System.Windows.Forms.Button();
+            this.lbl_admin_pass = new System.Windows.Forms.Label();
+            this.txtbox_admin_pass = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btn_sn
@@ -251,11 +254,44 @@
             this.txtbox_host.TabIndex = 18;
             this.txtbox_host.Text = "HostName";
             // 
+            // btn_admin
+            // 
+            this.btn_admin.Location = new System.Drawing.Point(8, 291);
+            this.btn_admin.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_admin.Name = "btn_admin";
+            this.btn_admin.Size = new System.Drawing.Size(127, 55);
+            this.btn_admin.TabIndex = 19;
+            this.btn_admin.Text = "Turn Local Admin ON";
+            this.btn_admin.UseVisualStyleBackColor = true;
+            this.btn_admin.Click += new System.EventHandler(this.btn_admin_Click);
+            // 
+            // lbl_admin_pass
+            // 
+            this.lbl_admin_pass.AutoSize = true;
+            this.lbl_admin_pass.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lbl_admin_pass.Location = new System.Drawing.Point(138, 312);
+            this.lbl_admin_pass.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_admin_pass.Name = "lbl_admin_pass";
+            this.lbl_admin_pass.Size = new System.Drawing.Size(56, 13);
+            this.lbl_admin_pass.TabIndex = 20;
+            this.lbl_admin_pass.Text = "Password:";
+            // 
+            // txtbox_admin_pass
+            // 
+            this.txtbox_admin_pass.Location = new System.Drawing.Point(198, 309);
+            this.txtbox_admin_pass.Margin = new System.Windows.Forms.Padding(2);
+            this.txtbox_admin_pass.Name = "txtbox_admin_pass";
+            this.txtbox_admin_pass.Size = new System.Drawing.Size(68, 20);
+            this.txtbox_admin_pass.TabIndex = 21;
+            // 
             // Computer_Info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(542, 304);
+            this.ClientSize = new System.Drawing.Size(542, 357);
+            this.Controls.Add(this.txtbox_admin_pass);
+            this.Controls.Add(this.lbl_admin_pass);
+            this.Controls.Add(this.btn_admin);
             this.Controls.Add(this.txtbox_host);
             this.Controls.Add(this.btn_set_host);
             this.Controls.Add(this.btn_hardrive);
@@ -306,6 +342,9 @@
         private System.Windows.Forms.Button btn_hardrive;
         private System.Windows.Forms.Button btn_set_host;
         private System.Windows.Forms.TextBox txtbox_host;
+        private System.Windows.Forms.Button btn_admin;
+        private System.Windows.Forms.Label lbl_admin_pass;
+        private System.Windows.Forms.TextBox txtbox_admin_pass;
     }
 }
 

@@ -102,5 +102,11 @@ namespace Computer_Info1
         {
             Clipboard.SetText(lbl_dhcp_wlan.Text);
         }
+
+        private void btn_admin_Click(object sender, EventArgs e)
+        {
+            //btn_admin.Text=Tools.SetLocalAdminOn(txtbox_admin_pass.ToString());
+            Tools.SetLocalAdminOn(txtbox_admin_pass.ToString());
+        }
     }
 }

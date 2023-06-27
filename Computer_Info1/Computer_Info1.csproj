@@ -48,6 +48,7 @@
       <HintPath>..\packages\System.CodeDom.8.0.0-preview.3.23174.8\lib\net462\System.CodeDom.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Management" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Xml.Linq" />

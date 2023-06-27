@@ -226,23 +226,6 @@ namespace Computer_Info1
 
         public static bool setLocalHostName(string newName)
         {
-            /*
-            RegistryKey key = Registry.LocalMachine;
-
-            string activeComputerName = "SYSTEM\\CurrentControlSet\\Control\\ComputerName\\ActiveComputerName";
-            RegistryKey activeCmpName = key.CreateSubKey(activeComputerName);
-            activeCmpName.SetValue("ComputerName", newName);
-            activeCmpName.Close();
-            string computerName = "SYSTEM\\CurrentControlSet\\Control\\ComputerName\\ComputerName";
-            RegistryKey cmpName = key.CreateSubKey(computerName);
-            cmpName.SetValue("ComputerName", newName);
-            cmpName.Close();
-            string _hostName = "SYSTEM\\CurrentControlSet\\services\\Tcpip\\Parameters\\";
-            RegistryKey hostName = key.CreateSubKey(_hostName);
-            hostName.SetValue("Hostname", newName);
-            hostName.SetValue("NV Hostname", newName);
-            hostName.Close();
-            */
             // Create a new process
             ProcessStartInfo process = new ProcessStartInfo();
 
@@ -258,7 +241,8 @@ namespace Computer_Info1
                 proc.WaitForExit();
 
                 // print the status of command
-                MessageBox.Show("Exit code = " + proc.ExitCode);
+                if (proc.ExitCode != 0) { MessageBox.Show("Exit code = " + proc.ExitCode); }
+                //MessageBox.Show("Exit code = " + proc.ExitCode);
             }
             return true;
         }
@@ -272,11 +256,25 @@ namespace Computer_Info1
 
         public static void SetLocalAdminOn(string password)
         {
-            PrincipalContext context = new PrincipalContext(ContextType.Machine);
-            string userName = "Administrator";
-            UserPrincipal user = UserPrincipal.FindByIdentity(context,  userName);
-            user.Enabled = true;
-            //return user.Name;
+            // Create a new process
+            ProcessStartInfo process = new ProcessStartInfo();
+
+            // set name of process to "WMIC.exe"
+            process.FileName = "WMIC.exe";
+
+            // pass rename PC command as argument
+            process.Arguments = "useraccount where \"name='Administrator' and domain='" + System.Net.Dns.GetHostName() + "'\" set disabled=false";
+
+            // Run the external process & wait for it to finish
+            using (Process proc = Process.Start(process))
+            {
+                proc.WaitForExit();
+
+                // print the status of command
+                if(proc.ExitCode!=0) {MessageBox.Show("Exit code = " + proc.ExitCode); }
+                
+            }
+
         }
     }
 }

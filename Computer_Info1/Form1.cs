@@ -106,7 +106,15 @@ namespace Computer_Info1
         private void btn_admin_Click(object sender, EventArgs e)
         {
             //btn_admin.Text=Tools.SetLocalAdminOn(txtbox_admin_pass.ToString());
-            Tools.SetLocalAdminOn(txtbox_admin_pass.ToString());
+            if(txtbox_admin_pass.Text!="")
+            {
+                Tools.SetLocalAdminOn(txtbox_admin_pass.Text);
+            }
+            else
+            {
+                MessageBox.Show("Podaj hasło administratora");
+            }
+            
         }
     }
 }

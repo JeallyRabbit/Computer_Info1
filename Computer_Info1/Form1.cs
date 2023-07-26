@@ -15,7 +15,7 @@ namespace Computer_Info1
         public Computer_Info()
         {
             InitializeComponent();
-            txtbox_admin_pass.PasswordChar = '*';
+            txtbox_admin_pass.PasswordChar = '●';
         }
 
         private void btn_sn_Click(object sender, EventArgs e)

@@ -166,15 +166,21 @@ namespace Computer_Info1
 
             //return userFolderPath;
             // Save the workbook
-            
-            workbook.SaveAs(filePath, XlFileFormat.xlOpenXMLWorkbook, Missing.Value,
-                Missing.Value, false, false, XlSaveAsAccessMode.xlNoChange,
-                XlSaveConflictResolution.xlUserResolution, true, Missing.Value,
-                Missing.Value, Missing.Value);
-            
-            // Close the workbook and release the COM objects
-            workbook.Close();
-            excel.Quit();
+
+            try
+            {
+                workbook.SaveAs(filePath, XlFileFormat.xlOpenXMLWorkbook, Missing.Value,
+                            Missing.Value, false, false, XlSaveAsAccessMode.xlNoChange,
+                            XlSaveConflictResolution.xlUserResolution, true, Missing.Value,
+                            Missing.Value, Missing.Value);
+                        // Close the workbook and release the COM objects
+                workbook.Close();
+                excel.Quit();
+            }
+            catch (Exception ex)
+            {
+
+            }
             
             System.Runtime.InteropServices.Marshal.ReleaseComObject(worksheet);
             System.Runtime.InteropServices.Marshal.ReleaseComObject(workbook);

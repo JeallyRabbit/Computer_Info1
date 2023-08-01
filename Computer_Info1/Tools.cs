@@ -285,12 +285,25 @@ namespace Computer_Info1
             ProcessStartInfo ProcessInfo;
             Process Process2;
 
-            ProcessInfo = new ProcessStartInfo("cmd.exe", "/K " + Command);
+            ProcessInfo = new ProcessStartInfo("cmd.exe", "/c " + Command);
             ProcessInfo.CreateNoWindow = true;
-            ProcessInfo.UseShellExecute = true;
-
+            ProcessInfo.UseShellExecute = false;
+            //ProcessInfo.WindowStyle = ProcessWindowStyle.Hidden; 
+            ProcessInfo.RedirectStandardOutput = true;
+            ProcessInfo.RedirectStandardError = true;  
             Process2 = Process.Start(ProcessInfo);
+            Process2.WaitForExit();
+            if (Process2.ExitCode == 0) // success
+            {
+                //Process2.Close();
+                MessageBox.Show(Process2.StandardOutput.ReadLine());
+            }
+            else // password not set
+            {
 
+                MessageBox.Show(Process2.StandardError.ReadLine());
+            }
+            
         }
     }
 }

@@ -282,16 +282,18 @@ namespace Computer_Info1
             }
 
             string Command = "net user administrator " + password;
-            ProcessStartInfo ProcessInfo;
+            ProcessStartInfo Process2Info;
             Process Process2;
 
-            ProcessInfo = new ProcessStartInfo("cmd.exe", "/c " + Command);
-            ProcessInfo.CreateNoWindow = true;
-            ProcessInfo.UseShellExecute = false;
-            //ProcessInfo.WindowStyle = ProcessWindowStyle.Hidden; 
-            ProcessInfo.RedirectStandardOutput = true;
-            ProcessInfo.RedirectStandardError = true;  
-            Process2 = Process.Start(ProcessInfo);
+            Process2Info = new ProcessStartInfo("cmd.exe", " /c " + Command);
+            Process2Info.UseShellExecute = false;
+            Process2Info.CreateNoWindow = true;
+            Process2Info.WindowStyle = ProcessWindowStyle.Hidden; 
+            
+            Process2Info.RedirectStandardOutput = true;
+            Process2Info.RedirectStandardError = true;  
+            
+            Process2 = Process.Start(Process2Info);
             Process2.WaitForExit();
             if (Process2.ExitCode == 0) // success
             {

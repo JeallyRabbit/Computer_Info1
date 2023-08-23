@@ -248,7 +248,11 @@ namespace Computer_Info1
 
                 // print the status of command
                 if (proc.ExitCode != 0) { MessageBox.Show("Exit code = " + proc.ExitCode); }
-                //MessageBox.Show("Exit code = " + proc.ExitCode);
+                DialogResult dialogResult = MessageBox.Show("Reboot is required, reboot now ?", "Reboot", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    Process.Start("ShutDown", "/r");
+                }
             }
             return true;
         }

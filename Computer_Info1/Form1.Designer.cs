@@ -1,6 +1,6 @@
 ﻿namespace Computer_Info1
 {
-    partial class Computer_Info
+    partial class Computer_Info_main_window
     {
         /// <summary>
         /// Required designer variable.
@@ -50,6 +50,7 @@
             this.btn_admin = new System.Windows.Forms.Button();
             this.lbl_admin_pass = new System.Windows.Forms.Label();
             this.txtbox_admin_pass = new System.Windows.Forms.TextBox();
+            this.btn_show_all = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_sn
@@ -284,11 +285,23 @@
             this.txtbox_admin_pass.Size = new System.Drawing.Size(68, 20);
             this.txtbox_admin_pass.TabIndex = 21;
             // 
-            // Computer_Info
+            // btn_show_all
+            // 
+            this.btn_show_all.Location = new System.Drawing.Point(410, 291);
+            this.btn_show_all.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_show_all.Name = "btn_show_all";
+            this.btn_show_all.Size = new System.Drawing.Size(127, 55);
+            this.btn_show_all.TabIndex = 22;
+            this.btn_show_all.Text = "Show All";
+            this.btn_show_all.UseVisualStyleBackColor = true;
+            this.btn_show_all.Click += new System.EventHandler(this.btn_show_all_Click);
+            // 
+            // Computer_Info_main_window
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(542, 357);
+            this.Controls.Add(this.btn_show_all);
             this.Controls.Add(this.txtbox_admin_pass);
             this.Controls.Add(this.lbl_admin_pass);
             this.Controls.Add(this.btn_admin);
@@ -313,8 +326,8 @@
             this.Controls.Add(this.btn_sn);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(557, 343);
-            this.Name = "Computer_Info";
-            this.Text = "Computer_Info";
+            this.Name = "Computer_Info_main_window";
+            this.Text = Tools.getManufacturerAndName();
             this.Load += new System.EventHandler(this.Computer_Info_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -345,6 +358,7 @@
         private System.Windows.Forms.Button btn_admin;
         private System.Windows.Forms.Label lbl_admin_pass;
         private System.Windows.Forms.TextBox txtbox_admin_pass;
+        private System.Windows.Forms.Button btn_show_all;
     }
 }
 

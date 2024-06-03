@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Computer_Info1
 {
-    public partial class Computer_Info : Form
+    public partial class Computer_Info_main_window : Form
     {
-        public Computer_Info()
+        public Computer_Info_main_window()
         {
             InitializeComponent();
             txtbox_admin_pass.PasswordChar = '●';
@@ -20,7 +20,7 @@ namespace Computer_Info1
 
         private void btn_sn_Click(object sender, EventArgs e)
         {
-            btn_sn.Text = "SN: "+Tools.GetLocalSN();
+            btn_sn.Text = "SN: " + Tools.GetLocalSN();
         }
 
         private void btn_ip_Click(object sender, EventArgs e)
@@ -55,13 +55,13 @@ namespace Computer_Info1
             lbl_dhcp_wlan.Visible = true;
         }
 
-       
+
 
         private void btn_export_Click(object sender, EventArgs e)
         {
             //btn_export.Text=Tools.ExportData();
-            btn_dhcp_Click(sender,e);
-            Tools.ExportData(lbl_dhcp_lan.Text, lbl_dhcp_wlan.Text,txtbox_nr_inw.Text,txtbox_id.Text);
+            btn_dhcp_Click(sender, e);
+            Tools.ExportData(lbl_dhcp_lan.Text, lbl_dhcp_wlan.Text, txtbox_nr_inw.Text, txtbox_id.Text);
         }
 
         private void btn_cpu_Click(object sender, EventArgs e)
@@ -71,7 +71,7 @@ namespace Computer_Info1
 
         private void btn_ram_Click(object sender, EventArgs e)
         {
-            btn_ram.Text= "RAM: "+Tools.getRAM()+ " GB";
+            btn_ram.Text = "RAM: " + Tools.getRAM() + " GB";
         }
 
         private void btn_hardrive_Click(object sender, EventArgs e)
@@ -81,17 +81,26 @@ namespace Computer_Info1
 
         private void btn_set_host_Click(object sender, EventArgs e)
         {
-            Tools.setLocalHostName(txtbox_host.Text);
-            btn_host.Text = "HOST: " + System.Net.Dns.GetHostName();
+            string valid = Tools.validateHostName(txtbox_host.Text);
+            if (valid == "OK")
+            {
+                Tools.setLocalHostName(txtbox_host.Text);
+                btn_host.Text = "HOST: " + System.Net.Dns.GetHostName();
+            }
+            else
+            {
+                MessageBox.Show(valid);
+            }
+
         }
 
         private void Computer_Info_Load(object sender, EventArgs e)
         {
-            if(!Tools.IsAdministrator())
+            if (!Tools.IsAdministrator())
             {
                 MessageBox.Show("Not Running as administrator");
             }
-            
+
         }
 
         private void lbl_dhcp_lan_Click(object sender, EventArgs e)
@@ -107,8 +116,8 @@ namespace Computer_Info1
         private void btn_admin_Click(object sender, EventArgs e)
         {
             //btn_admin.Text=Tools.SetLocalAdminOn(txtbox_admin_pass.ToString());
-            
-            if(txtbox_admin_pass.Text!="")
+
+            if (txtbox_admin_pass.Text != "")
             {
                 Tools.SetLocalAdminOn(txtbox_admin_pass.Text);
             }
@@ -116,7 +125,20 @@ namespace Computer_Info1
             {
                 MessageBox.Show("Podaj hasło administratora");
             }
-            
+
+        }
+
+        private void btn_show_all_Click(object sender, EventArgs e)
+        {
+            btn_sn_Click(sender, e);
+            btn_ip_Click(sender, e);
+            btn_host_Click(sender, e);
+            btn_mac_lan_Click(sender, e);
+            btn_mac_wlan_Click(sender, e);
+            btn_ram_Click(sender, e);
+            btn_cpu_Click(sender, e);
+            btn_ram_Click(sender, e);
+            btn_hardrive_Click(sender, e);
         }
     }
 }

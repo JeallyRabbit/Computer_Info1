@@ -1,0 +1,17 @@
+C:\Users\aleks.karczewski\Documents\GitHub\Computer_Info1\Computer_Info1\bin\Release\Computer_Info1.exe.config
+C:\Users\aleks.karczewski\Documents\GitHub\Computer_Info1\Computer_Info1\bin\Release\Computer_Info1.exe
+C:\Users\aleks.karczewski\Documents\GitHub\Computer_Info1\Computer_Info1\bin\Release\Computer_Info1.pdb
+C:\Users\aleks.karczewski\Documents\GitHub\Computer_Info1\Computer_Info1\bin\Release\CXuesong.Shims.VisualBasic.Devices.dll
+C:\Users\aleks.karczewski\Documents\GitHub\Computer_Info1\Computer_Info1\bin\Release\System.CodeDom.dll
+C:\Users\aleks.karczewski\Documents\GitHub\Computer_Info1\Computer_Info1\bin\Release\CXuesong.Shims.VisualBasic.Devices.pdb
+C:\Users\aleks.karczewski\Documents\GitHub\Computer_Info1\Computer_Info1\bin\Release\CXuesong.Shims.VisualBasic.Devices.xml
+C:\Users\aleks.karczewski\Documents\GitHub\Computer_Info1\Computer_Info1\bin\Release\System.CodeDom.xml
+C:\Users\aleks.karczewski\Documents\GitHub\Computer_Info1\Computer_Info1\obj\Release\Computer_Info1.csproj.AssemblyReference.cache
+C:\Users\aleks.karczewski\Documents\GitHub\Computer_Info1\Computer_Info1\obj\Release\Computer_Info1.csproj.SuggestedBindingRedirects.cache
+C:\Users\aleks.karczewski\Documents\GitHub\Computer_Info1\Computer_Info1\obj\Release\Computer_Info1.Computer_Info.resources
+C:\Users\aleks.karczewski\Documents\GitHub\Computer_Info1\Computer_Info1\obj\Release\Computer_Info1.Properties.Resources.resources
+C:\Users\aleks.karczewski\Documents\GitHub\Computer_Info1\Computer_Info1\obj\Release\Computer_Info1.csproj.GenerateResource.cache
+C:\Users\aleks.karczewski\Documents\GitHub\Computer_Info1\Computer_Info1\obj\Release\Computer_Info1.csproj.CoreCompileInputs.cache
+C:\Users\aleks.karczewski\Documents\GitHub\Computer_Info1\Computer_Info1\obj\Release\Computer_Info1.csproj.CopyComplete
+C:\Users\aleks.karczewski\Documents\GitHub\Computer_Info1\Computer_Info1\obj\Release\Computer_Info1.exe
+C:\Users\aleks.karczewski\Documents\GitHub\Computer_Info1\Computer_Info1\obj\Release\Computer_Info1.pdb

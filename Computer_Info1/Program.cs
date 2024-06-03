@@ -16,7 +16,7 @@ namespace Computer_Info1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Computer_Info());
+            Application.Run(new Computer_Info_main_window());
         }
     }
 }

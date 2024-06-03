@@ -13,6 +13,7 @@ using System.Security.Principal;
 using System.Diagnostics;
 using System.DirectoryServices.AccountManagement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Text.RegularExpressions;
 
 namespace Computer_Info1
 {
@@ -235,11 +236,24 @@ namespace Computer_Info1
             // Create a new process
             ProcessStartInfo process = new ProcessStartInfo();
 
+            string domainUser = "";
+            string domainPassword = "";
+            Form2 credentialsForm=new Form2();
+            credentialsForm.ShowDialog();
+
+            if(credentialsForm.Visible==false)
+            {
+                domainUser = credentialsForm.returnUsername;
+                domainPassword = credentialsForm.returnPassword;
+            }
+
+            //MessageBox.Show(domainUser+ " "+ domainPassword);
+
             // set name of process to "WMIC.exe"
             process.FileName = "WMIC.exe";
 
             // pass rename PC command as argument
-            process.Arguments = "computersystem where caption='" + System.Environment.MachineName + "' rename " + newName;
+            process.Arguments = "computersystem where caption='" + System.Environment.MachineName + "' rename " + newName + domainUser+" "+domainPassword;
 
             // Run the external process & wait for it to finish
             using (Process proc = Process.Start(process))
@@ -248,11 +262,15 @@ namespace Computer_Info1
 
                 // print the status of command
                 if (proc.ExitCode != 0) { MessageBox.Show("Exit code = " + proc.ExitCode); }
-                DialogResult dialogResult = MessageBox.Show("Reboot is required, reboot now ?", "Reboot", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
+                else
                 {
-                    Process.Start("ShutDown", "/r");
+                    DialogResult dialogResult = MessageBox.Show("Reboot is required, reboot now ?", "Reboot", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        Process.Start("ShutDown", "/r");
+                    }
                 }
+                
             }
             return true;
         }
@@ -310,6 +328,66 @@ namespace Computer_Info1
                 MessageBox.Show(Process2.StandardError.ReadLine());
             }
             
+        }
+
+
+        public static string validateHostName(string  hostName)
+        {
+            if (string.IsNullOrEmpty(hostName) || hostName.Length > 63)
+            {
+                return "HostName must have between 1-63 characters";
+            }
+
+            // Check if the hostname contains only valid characters
+            if (!Regex.IsMatch(hostName, @"^[a-zA-Z0-9-]+$"))
+            {
+                return "HostName contain invalid characters";
+            }
+
+            // Check if the hostname starts or ends with a hyphen
+            if (hostName.StartsWith("-") || hostName.EndsWith("-"))
+            {
+                return "HostName can't start\\end with \'-\'";
+            }
+
+            // Check if the hostname consists only of digits
+            if (Regex.IsMatch(hostName, @"^\d+$"))
+            {
+                return "HostName can't be only digits";
+            }
+
+            return "OK";
+        }
+
+        public static string getManufacturerAndName()
+        {
+
+            string hostName= System.Net.Dns.GetHostName();
+            string manufacturer="";
+            string model="";
+
+
+            System.Management.SelectQuery query = new System.Management.SelectQuery(@"Select * from Win32_ComputerSystem");
+
+            //initialize the searcher with the query it is supposed to execute
+            using (System.Management.ManagementObjectSearcher searcher = new System.Management.ManagementObjectSearcher(query))
+            {
+                //execute the query
+                foreach (System.Management.ManagementObject process in searcher.Get())
+                {
+                    //print system info
+                    process.Get();
+                    Console.WriteLine("/*********Operating System Information ***************/");
+                    manufacturer = process["Manufacturer"].ToString();
+                    model = process["Model"].ToString();
+                    Console.WriteLine("{0}{1}", "System Manufacturer:", process["Manufacturer"]);
+                    Console.WriteLine("{0}{1}", " System Model:", process["Model"]);
+
+
+                }
+            }
+
+            return manufacturer+model;
         }
     }
 }

@@ -135,6 +135,9 @@
     </Compile>
     <None Include="app.manifest" />
     <None Include="Computer_Info1_TemporaryKey.pfx" />
+    <None Include="Lastuser10.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

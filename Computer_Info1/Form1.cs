@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Computer_Info1
 {
@@ -139,6 +140,24 @@ namespace Computer_Info1
             btn_cpu_Click(sender, e);
             btn_ram_Click(sender, e);
             btn_hardrive_Click(sender, e);
+        }
+
+        private void txtbox_host_TextChanged(object sender, EventArgs e)
+        {
+            string host_validation=Tools.validateHostName(txtbox_host.Text);
+            if(host_validation != "OK")
+            {
+                MessageBox.Show(host_validation);
+                txtbox_host.SelectAll();
+            }
+        }
+
+        private void btn_last_user_Click(object sender, EventArgs e)
+        {
+            // executing lastuser
+            string file_name = "Lastuser10.bat";
+            string parameters = $"/k \"{file_name}\"";
+            Process.Start(file_name, parameters ); 
         }
     }
 }

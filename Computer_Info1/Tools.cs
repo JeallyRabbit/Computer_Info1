@@ -14,6 +14,7 @@ using System.Diagnostics;
 using System.DirectoryServices.AccountManagement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Text.RegularExpressions;
+//using System.Management.Automation;
 
 namespace Computer_Info1
 {
@@ -161,6 +162,8 @@ namespace Computer_Info1
             worksheet.Cells[4, 1] = dhcp_lan;
             worksheet.Cells[6, 1] = dhcp_wlan;
 
+            //Microsoft.Office.Interop.Excel.Range usedRange = worksheet.UsedRange;
+            worksheet.UsedRange.Columns.AutoFit();
 
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string filePath = Path.Combine(desktopPath, "Raport " + System.Net.Dns.GetHostName() + ".xlsx");
@@ -180,7 +183,7 @@ namespace Computer_Info1
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.ToString());
             }
             
             System.Runtime.InteropServices.Marshal.ReleaseComObject(worksheet);
@@ -234,9 +237,10 @@ namespace Computer_Info1
         public static bool setLocalHostName(string newName)
         {
             // Create a new process
-            ProcessStartInfo process = new ProcessStartInfo();
-
+            //ProcessStartInfo process = new ProcessStartInfo();
+            
             string domainUser = "";
+            
             string domainPassword = "";
             Form2 credentialsForm=new Form2();
             credentialsForm.ShowDialog();
@@ -247,21 +251,55 @@ namespace Computer_Info1
                 domainPassword = credentialsForm.returnPassword;
             }
 
+            //domainUser = "C4CR.LOCAL\\" + domainUser;
+            string domainName= System.Net.NetworkInformation.IPGlobalProperties.GetIPGlobalProperties().DomainName;
+
+            string script = $@"
+            $newName = '{newName}'
+            $domain = '{domainName}'
+            $username = '{domainUser}'
+            $password = ConvertTo-SecureString '{domainPassword}' -AsPlainText -Force
+            $credential = New-Object System.Management.Automation.PSCredential ($username, $password);
+            
+            Rename-Computer -NewName $newName -DomainCredential $credential -Force";
+
+
+            ProcessStartInfo processInfo = new ProcessStartInfo
+            {
+                FileName = "powershell.exe",
+                Arguments = $"-NoProfile -ExecutionPolicy Bypass -Command \"{script}\"",
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
+
+            };
+
+            /*
             //MessageBox.Show(domainUser+ " "+ domainPassword);
 
             // set name of process to "WMIC.exe"
             process.FileName = "WMIC.exe";
 
             // pass rename PC command as argument
-            process.Arguments = "computersystem where caption='" + System.Environment.MachineName + "' rename " + newName + domainUser+" "+domainPassword;
-
+            process.Arguments = "computersystem where caption='" + System.Environment.MachineName + "' rename '" + newName +"', '" +domainUser+"', '"+domainPassword+"'";
+            Console.WriteLine(process.Arguments.ToString());
+            */
             // Run the external process & wait for it to finish
-            using (Process proc = Process.Start(process))
+            //using (Process proc = Process.Start(process))
+            using (Process process = new Process { StartInfo = processInfo })
             {
-                proc.WaitForExit();
+
+                process.Start();
+
+                // Read the output (optional)
+                string output = process.StandardOutput.ReadToEnd();
+                string error = process.StandardError.ReadToEnd();
+
+                process.WaitForExit();
 
                 // print the status of command
-                if (proc.ExitCode != 0) { MessageBox.Show("Exit code = " + proc.ExitCode); }
+                if (process.ExitCode != 0) { MessageBox.Show("Exit code = " + process.ExitCode); }
                 else
                 {
                     DialogResult dialogResult = MessageBox.Show("Reboot is required, reboot now ?", "Reboot", MessageBoxButtons.YesNo);
@@ -333,6 +371,10 @@ namespace Computer_Info1
 
         public static string validateHostName(string  hostName)
         {
+            if(System.Net.Dns.GetHostName()==hostName)
+            {
+                return "New hostName can't be the same as current hostName";
+            }
             if (string.IsNullOrEmpty(hostName) || hostName.Length > 63)
             {
                 return "HostName must have between 1-63 characters";

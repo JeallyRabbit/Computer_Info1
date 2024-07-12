@@ -68,3 +68,4 @@ C:\Users\aleks.karczewski\source\repos\Computer_Info1\Computer_Info1\bin\Debug\C
 C:\Users\aleks.karczewski\source\repos\Computer_Info1\Computer_Info1\bin\Debug\CXuesong.Shims.VisualBasic.Devices.xml
 C:\Users\aleks.karczewski\source\repos\Computer_Info1\Computer_Info1\bin\Debug\System.CodeDom.xml
 C:\Users\aleks.karczewski\source\repos\Computer_Info1\Computer_Info1\obj\Debug\Computer_Info1.csproj.CopyComplete
+C:\Users\aleks.karczewski\source\repos\Computer_Info1\Computer_Info1\bin\Debug\Lastuser10.bat

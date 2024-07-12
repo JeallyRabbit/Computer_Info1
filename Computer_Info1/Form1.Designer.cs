@@ -51,6 +51,7 @@
             this.lbl_admin_pass = new System.Windows.Forms.Label();
             this.txtbox_admin_pass = new System.Windows.Forms.TextBox();
             this.btn_show_all = new System.Windows.Forms.Button();
+            this.btn_last_user = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_sn
@@ -254,6 +255,7 @@
             this.txtbox_host.Size = new System.Drawing.Size(129, 20);
             this.txtbox_host.TabIndex = 18;
             this.txtbox_host.Text = "HostName";
+            this.txtbox_host.TextChanged += new System.EventHandler(this.txtbox_host_TextChanged);
             // 
             // btn_admin
             // 
@@ -296,11 +298,23 @@
             this.btn_show_all.UseVisualStyleBackColor = true;
             this.btn_show_all.Click += new System.EventHandler(this.btn_show_all_Click);
             // 
+            // btn_last_user
+            // 
+            this.btn_last_user.Location = new System.Drawing.Point(276, 291);
+            this.btn_last_user.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_last_user.Name = "btn_last_user";
+            this.btn_last_user.Size = new System.Drawing.Size(127, 55);
+            this.btn_last_user.TabIndex = 23;
+            this.btn_last_user.Text = "Set LastUser";
+            this.btn_last_user.UseVisualStyleBackColor = true;
+            this.btn_last_user.Click += new System.EventHandler(this.btn_last_user_Click);
+            // 
             // Computer_Info_main_window
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(542, 357);
+            this.Controls.Add(this.btn_last_user);
             this.Controls.Add(this.btn_show_all);
             this.Controls.Add(this.txtbox_admin_pass);
             this.Controls.Add(this.lbl_admin_pass);
@@ -327,7 +341,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MinimumSize = new System.Drawing.Size(557, 343);
             this.Name = "Computer_Info_main_window";
-            this.Text = Tools.getManufacturerAndName();
+            this.Text = "Dell Inc.Latitude 7420";
             this.Load += new System.EventHandler(this.Computer_Info_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -359,6 +373,7 @@
         private System.Windows.Forms.Label lbl_admin_pass;
         private System.Windows.Forms.TextBox txtbox_admin_pass;
         private System.Windows.Forms.Button btn_show_all;
+        private System.Windows.Forms.Button btn_last_user;
     }
 }
 

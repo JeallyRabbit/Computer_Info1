@@ -34,12 +34,14 @@
             this.btn_cancel = new System.Windows.Forms.Button();
             this.txtBox_username = new System.Windows.Forms.TextBox();
             this.txtBox_password = new System.Windows.Forms.TextBox();
+            this.txtBox_domainName = new System.Windows.Forms.TextBox();
+            this.lbl_domainName = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbl_username
             // 
             this.lbl_username.AutoSize = true;
-            this.lbl_username.Location = new System.Drawing.Point(8, 9);
+            this.lbl_username.Location = new System.Drawing.Point(12, 37);
             this.lbl_username.Name = "lbl_username";
             this.lbl_username.Size = new System.Drawing.Size(57, 13);
             this.lbl_username.TabIndex = 0;
@@ -49,7 +51,7 @@
             // lbl_password
             // 
             this.lbl_password.AutoSize = true;
-            this.lbl_password.Location = new System.Drawing.Point(8, 36);
+            this.lbl_password.Location = new System.Drawing.Point(12, 63);
             this.lbl_password.Name = "lbl_password";
             this.lbl_password.Size = new System.Drawing.Size(53, 13);
             this.lbl_password.TabIndex = 1;
@@ -57,7 +59,7 @@
             // 
             // btn_ok
             // 
-            this.btn_ok.Location = new System.Drawing.Point(11, 61);
+            this.btn_ok.Location = new System.Drawing.Point(12, 86);
             this.btn_ok.Name = "btn_ok";
             this.btn_ok.Size = new System.Drawing.Size(75, 23);
             this.btn_ok.TabIndex = 2;
@@ -67,7 +69,7 @@
             // 
             // btn_cancel
             // 
-            this.btn_cancel.Location = new System.Drawing.Point(130, 61);
+            this.btn_cancel.Location = new System.Drawing.Point(132, 86);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(75, 23);
             this.btn_cancel.TabIndex = 3;
@@ -77,23 +79,42 @@
             // 
             // txtBox_username
             // 
-            this.txtBox_username.Location = new System.Drawing.Point(80, 6);
+            this.txtBox_username.Location = new System.Drawing.Point(82, 34);
             this.txtBox_username.Name = "txtBox_username";
             this.txtBox_username.Size = new System.Drawing.Size(125, 20);
             this.txtBox_username.TabIndex = 4;
             // 
             // txtBox_password
             // 
-            this.txtBox_password.Location = new System.Drawing.Point(80, 33);
+            this.txtBox_password.Location = new System.Drawing.Point(82, 60);
             this.txtBox_password.Name = "txtBox_password";
             this.txtBox_password.Size = new System.Drawing.Size(125, 20);
             this.txtBox_password.TabIndex = 5;
+            // 
+            // txtBox_domainName
+            // 
+            this.txtBox_domainName.Location = new System.Drawing.Point(82, 8);
+            this.txtBox_domainName.Name = "txtBox_domainName";
+            this.txtBox_domainName.Size = new System.Drawing.Size(125, 20);
+            this.txtBox_domainName.TabIndex = 6;
+            
+            // 
+            // lbl_domainName
+            // 
+            this.lbl_domainName.AutoSize = true;
+            this.lbl_domainName.Location = new System.Drawing.Point(12, 11);
+            this.lbl_domainName.Name = "lbl_domainName";
+            this.lbl_domainName.Size = new System.Drawing.Size(71, 13);
+            this.lbl_domainName.TabIndex = 7;
+            this.lbl_domainName.Text = "DomainName";
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(217, 96);
+            this.ClientSize = new System.Drawing.Size(219, 121);
+            this.Controls.Add(this.lbl_domainName);
+            this.Controls.Add(this.txtBox_domainName);
             this.Controls.Add(this.txtBox_password);
             this.Controls.Add(this.txtBox_username);
             this.Controls.Add(this.btn_cancel);
@@ -115,5 +136,7 @@
         private System.Windows.Forms.Button btn_cancel;
         private System.Windows.Forms.TextBox txtBox_username;
         private System.Windows.Forms.TextBox txtBox_password;
+        private System.Windows.Forms.TextBox txtBox_domainName;
+        private System.Windows.Forms.Label lbl_domainName;
     }
 }

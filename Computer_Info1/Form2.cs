@@ -16,6 +16,8 @@ namespace Computer_Info1
         public string returnUsername { get; set; }
         public string returnPassword { get; set; }
 
+        public string returnDomainName { get; set; }
+
         public bool credentialsSet { get; set; }
 
         
@@ -25,7 +27,10 @@ namespace Computer_Info1
             InitializeComponent();
             txtBox_password.PasswordChar = '●';
             txtBox_username.Select();
-
+            if (System.Net.NetworkInformation.IPGlobalProperties.GetIPGlobalProperties().DomainName != string.Empty)
+            {
+                this.txtBox_domainName.Text = System.Net.NetworkInformation.IPGlobalProperties.GetIPGlobalProperties().DomainName;
+            }
         }
         
         
@@ -40,8 +45,10 @@ namespace Computer_Info1
             {
                 this.returnPassword = txtBox_password.Text;
                 this.returnUsername = txtBox_username.Text;
+                this.returnDomainName=txtBox_domainName.Text;
                 this.credentialsSet= true;
                 this.Visible = false;
+
             }
         }
 

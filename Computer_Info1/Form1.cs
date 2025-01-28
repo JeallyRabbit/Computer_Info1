@@ -154,7 +154,7 @@ namespace Computer_Info1
 
         private void btn_last_user_Click(object sender, EventArgs e)
         {
-            // executing lastuser
+            // executing lastuser.bat
             string file_name = "Lastuser10.bat";
             string parameters = $"/k \"{file_name}\"";
             Process.Start(file_name, parameters ); 

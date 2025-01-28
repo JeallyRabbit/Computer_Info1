@@ -236,11 +236,8 @@ namespace Computer_Info1
 
         public static bool setLocalHostName(string newName)
         {
-            // Create a new process
-            //ProcessStartInfo process = new ProcessStartInfo();
-            
+            string domainName = "";
             string domainUser = "";
-            
             string domainPassword = "";
             Form2 credentialsForm=new Form2();
             credentialsForm.ShowDialog();
@@ -251,8 +248,7 @@ namespace Computer_Info1
                 domainPassword = credentialsForm.returnPassword;
             }
 
-            //domainUser = "C4CR.LOCAL\\" + domainUser;
-            string domainName= System.Net.NetworkInformation.IPGlobalProperties.GetIPGlobalProperties().DomainName;
+
 
             string script = $@"
             $newName = '{newName}'
@@ -274,19 +270,6 @@ namespace Computer_Info1
                 RedirectStandardError = true
 
             };
-
-            /*
-            //MessageBox.Show(domainUser+ " "+ domainPassword);
-
-            // set name of process to "WMIC.exe"
-            process.FileName = "WMIC.exe";
-
-            // pass rename PC command as argument
-            process.Arguments = "computersystem where caption='" + System.Environment.MachineName + "' rename '" + newName +"', '" +domainUser+"', '"+domainPassword+"'";
-            Console.WriteLine(process.Arguments.ToString());
-            */
-            // Run the external process & wait for it to finish
-            //using (Process proc = Process.Start(process))
             using (Process process = new Process { StartInfo = processInfo })
             {
 
